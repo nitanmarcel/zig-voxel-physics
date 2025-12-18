@@ -24,8 +24,17 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(lib);
 
     // Documentation
+    const autodoc = b.addObject(.{
+        .name = "zig-voxel-physics",
+        .zig_lib_dir = b.path("docs"),
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/physics.zig"),
+            .target = target,
+            .optimize = .Debug,
+        }),
+    });
     const install_docs = b.addInstallDirectory(.{
-        .source_dir = lib.getEmittedDocs(),
+        .source_dir = autodoc.getEmittedDocs(),
         .install_dir = .prefix,
         .install_subdir = "docs",
     });
