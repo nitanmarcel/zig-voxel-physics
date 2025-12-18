@@ -26,7 +26,6 @@ pub fn build(b: *std.Build) void {
     // Documentation
     const autodoc = b.addObject(.{
         .name = "zig-voxel-physics",
-        .zig_lib_dir = b.path("docs"),
         .root_module = b.createModule(.{
             .root_source_file = b.path("src/physics.zig"),
             .target = target,
