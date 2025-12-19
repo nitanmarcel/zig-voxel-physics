@@ -660,14 +660,14 @@ pub fn getOverlapRegion(
         t_max = t_max.maxComponents(relative);
     }
 
-    const half_dim_a = collider_a.getDimensions().scale(0.5);
+    const local_aabb_a = collider_a.getLocalAABB();
     const voxel_size = collider_a.voxel_size;
 
     t_min = t_min.sub(Vec3.splat(voxel_size));
     t_max = t_max.add(Vec3.splat(voxel_size));
 
-    const min_clamped = t_min.clamp(half_dim_a.negate(), half_dim_a);
-    const max_clamped = t_max.clamp(half_dim_a.negate(), half_dim_a);
+    const min_clamped = t_min.clamp(local_aabb_a.min, local_aabb_a.max);
+    const max_clamped = t_max.clamp(local_aabb_a.min, local_aabb_a.max);
 
     if (min_clamped.x >= max_clamped.x or
         min_clamped.y >= max_clamped.y or
