@@ -4,7 +4,7 @@ A high-performance voxel-to-voxel physics engine written in Zig. Designed for my
 
 ## Features
 
-- **Voxel-Based Colliders** - Sparse brick structure (4×4×4 voxel bricks) with per-voxel type classification
+- **Voxel-Based Colliders** - Sparse brick structure (8×8×8 voxel bricks) with per-voxel type classification
 - **TGS Soft Solver** - Temporal Gauss-Seidel with soft constraints for stable stacking
 - **Speculative Contacts** - Prevents contact loss and micro-bouncing at rest
 - **Island-Based Sleeping** - Near-zero CPU cost when bodies are at rest (~0.003ms)
@@ -235,19 +235,18 @@ zig build example
 
 ## References
 
-- **Box2D** by Erin Catto
-  - [box2d.org](https://box2d.org/)
-
-- **Bullet Physics**
-  - [bulletphysics.org](https://bulletphysics.org/)
-
+- **Box2D** by Erin Catto ([box2d.org](https://box2d.org/))
+  - Used for the constraint solver, contact management, and warm starting
+- **Bullet Physics** ([bulletphysics.org](https://bulletphysics.org/))
+  - Broad phase culling, sleeping system, and threading approach
 - **Catto, E.** "Soft Constraints" (GDC 2011)
-
+  - Soft constraint math (the spring-damper model)
 - **Catto, E.** "Solver2D" (GDC 2024)
-
+  - TGS solver iteration structure
 - **Coumans, E.** "Collision Detection" (GDC)
-
+  - SAT algorithm for OBB collision testing
 - **Lengyel, E.** "Voxel-Based Terrain for Real-Time Virtual Simulations"
+  - Sparse voxel storage (changed from 16³ blocks to 8³ bricks for collision)
 
 ## License
 
